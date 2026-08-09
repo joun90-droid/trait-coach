@@ -1,0 +1,101 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #f0f7fa;
+  --panel: #ffffff;
+  --card: #e8f4f8;
+  --border: #b8d4de;
+  --text: #0c1e26;
+  --muted: #3d5c68;
+  --accent: #0e7490;
+  --accent2: #0891b2;
+  --success: #059669;
+  --danger: #dc2626;
+  --gold: #b45309;
+  --memory-bg: #ecfeff;
+  --memory-border: #a5f3fc;
+  --exam-bg: #fff7ed;
+  --exam-border: #fdba74;
+}
+
+.dark {
+  --bg: #071218;
+  --panel: #0c1a22;
+  --card: #122530;
+  --border: #1e3a48;
+  --text: #e0f2fe;
+  --muted: #8eb4c4;
+  --accent: #22d3ee;
+  --accent2: #67e8f9;
+  --success: #34d399;
+  --danger: #f87171;
+  --gold: #fbbf24;
+  --memory-bg: #0a1f26;
+  --memory-border: #155e75;
+  --exam-bg: #1c140c;
+  --exam-border: #9a3412;
+}
+
+@theme inline {
+  --color-re-bg: var(--bg);
+  --color-re-panel: var(--panel);
+  --color-re-card: var(--card);
+  --color-re-border: var(--border);
+  --color-re-text: var(--text);
+  --color-re-muted: var(--muted);
+  --color-re-accent: var(--accent);
+  --color-re-accent2: var(--accent2);
+  --color-re-success: var(--success);
+  --color-re-danger: var(--danger);
+  --color-re-gold: var(--gold);
+  --font-sans: var(--font-geist-sans);
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  min-height: 100dvh;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 50% at 0% -10%, color-mix(in srgb, var(--accent) 12%, transparent), transparent),
+    radial-gradient(ellipse 60% 40% at 100% 0%, color-mix(in srgb, var(--accent2) 10%, transparent), transparent);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.dark body::before {
+  background:
+    radial-gradient(ellipse 70% 50% at 50% -20%, rgba(34, 211, 238, 0.1), transparent),
+    radial-gradient(ellipse 50% 30% at 100% 100%, rgba(8, 145, 178, 0.08), transparent);
+}
+
+@layer components {
+  .glass {
+    @apply rounded-2xl border border-re-border bg-re-panel/95 shadow-sm backdrop-blur-md;
+  }
+  .chip {
+    @apply inline-flex shrink-0 items-center rounded-full border border-re-border bg-re-card px-3 py-1.5 text-xs font-medium text-re-muted transition;
+  }
+  .chip-on {
+    @apply border-re-accent bg-re-accent/15 text-re-accent font-semibold;
+  }
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-re-accent px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:brightness-110 disabled:opacity-50;
+  }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl border border-re-border bg-re-card px-4 py-2 text-sm text-re-text transition hover:border-re-accent/50 disabled:opacity-40;
+  }
+  .memory-box {
+    background: var(--memory-bg);
+    border: 1px solid var(--memory-border);
+    @apply rounded-xl p-3 text-sm leading-relaxed;
+  }
+}
