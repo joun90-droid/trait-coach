@@ -4,7 +4,7 @@ import { useState } from "react";
 import { COPE_CARDS } from "@/lib/content";
 import { loadScores } from "@/lib/storage";
 import { bandLabel } from "@/lib/trait-test";
-import { ChevronDown, ChevronUp, Shield } from "lucide-react";
+import { ChevronDown, Shield } from "lucide-react";
 import { useEffect } from "react";
 
 export function CopePanel() {
@@ -49,7 +49,7 @@ export function CopePanel() {
       {COPE_CARDS.map((card) => {
         const open = openId === card.id;
         return (
-          <div key={card.id} className="glass overflow-hidden">
+          <div key={card.id} className={`glass overflow-hidden ${open ? "" : "bento-hover"}`}>
             <button
               type="button"
               onClick={() => setOpenId(open ? "" : card.id)}
@@ -59,10 +59,12 @@ export function CopePanel() {
                 <p className="font-semibold">{card.title}</p>
                 <p className="mt-1 text-xs text-re-muted">{card.forWhen}</p>
               </div>
-              {open ? <ChevronUp className="h-5 w-5 text-re-muted" /> : <ChevronDown className="h-5 w-5 text-re-muted" />}
+              <ChevronDown
+                className={`h-5 w-5 shrink-0 text-re-muted transition-transform duration-300 ${open ? "rotate-180" : ""}`}
+              />
             </button>
             {open && (
-              <div className="space-y-3 border-t border-re-border px-4 pb-4 pt-3">
+              <div className="animate-tab-in space-y-3 border-t border-re-border px-4 pb-4 pt-3">
                 <ol className="list-decimal space-y-2 pl-4 text-sm leading-relaxed text-re-muted">
                   {card.steps.map((s) => (
                     <li key={s}>{s}</li>

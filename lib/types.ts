@@ -45,6 +45,22 @@ export interface GuideSection {
   topics: GuideTopic[];
 }
 
+/** 오늘의 파훼법 실천 체크인 (스트릭용) */
+export interface CheckIn {
+  /** YYYY-MM-DD (로컬 기준) */
+  date: string;
+  /** true = 파훼법을 썼음 / false = 오늘은 어려웠음 */
+  success: boolean;
+  cardId?: string;
+}
+
+export interface StreakInfo {
+  current: number;
+  best: number;
+  todayDone: boolean;
+  last7: { date: string; state: "success" | "miss" | "none" }[];
+}
+
 export const AXIS_LABELS: Record<TraitAxis, string> = {
   cold: "냉정·공감 둔감 기질",
   impulse: "충동·규칙 이탈 기질",

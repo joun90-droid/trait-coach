@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { GUIDE_SECTIONS } from "@/lib/content";
-import { BookMarked, ChevronDown, ChevronUp, Lightbulb } from "lucide-react";
+import { BookMarked, ChevronDown, Lightbulb } from "lucide-react";
 
 export function GuidePanel() {
   const [openId, setOpenId] = useState(GUIDE_SECTIONS[0]?.id ?? "");
@@ -25,7 +25,7 @@ export function GuidePanel() {
       {GUIDE_SECTIONS.map((sec) => {
         const open = openId === sec.id;
         return (
-          <div key={sec.id} className="glass overflow-hidden">
+          <div key={sec.id} className={`glass overflow-hidden ${open ? "" : "bento-hover"}`}>
             <button
               type="button"
               onClick={() => setOpenId(open ? "" : sec.id)}
@@ -36,10 +36,12 @@ export function GuidePanel() {
                 <p className="font-semibold">{sec.title}</p>
                 <p className="text-xs text-re-muted">{sec.subtitle}</p>
               </div>
-              {open ? <ChevronUp className="h-5 w-5 text-re-muted" /> : <ChevronDown className="h-5 w-5 text-re-muted" />}
+              <ChevronDown
+                className={`h-5 w-5 shrink-0 text-re-muted transition-transform duration-300 ${open ? "rotate-180" : ""}`}
+              />
             </button>
             {open && (
-              <div className="space-y-3 border-t border-re-border px-3 pb-4 pt-3 sm:px-4">
+              <div className="animate-tab-in space-y-3 border-t border-re-border px-3 pb-4 pt-3 sm:px-4">
                 {sec.topics.map((t) => {
                   const tid = `${sec.id}:${t.title}`;
                   const tOpen = topicOpen === tid;
@@ -54,10 +56,12 @@ export function GuidePanel() {
                           <p className="font-semibold">{t.title}</p>
                           <p className="mt-1 text-sm text-re-muted">{t.summary}</p>
                         </div>
-                        {tOpen ? <ChevronUp className="h-4 w-4 text-re-muted" /> : <ChevronDown className="h-4 w-4 text-re-muted" />}
+                        <ChevronDown
+                          className={`h-4 w-4 shrink-0 text-re-muted transition-transform duration-300 ${tOpen ? "rotate-180" : ""}`}
+                        />
                       </button>
                       {tOpen && (
-                        <div className="space-y-3 border-t border-re-border px-4 pb-4 pt-3">
+                        <div className="animate-tab-in space-y-3 border-t border-re-border px-4 pb-4 pt-3">
                           <p className="text-sm leading-relaxed text-re-muted">{t.detail}</p>
                           <div className="memory-box">
                             <p className="mb-1 flex items-center gap-1.5 text-xs font-bold text-re-accent">

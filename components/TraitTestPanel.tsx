@@ -59,7 +59,7 @@ export function TraitTestPanel({ onFinished }: { onFinished?: () => void }) {
       { label: "사회 적응·조절 자원", pct: scores.prosocialPct, hint: "높을수록 파훼법에 쓸 ‘근육’이 있는 편" },
     ];
     return (
-      <div className="space-y-4">
+      <div className="animate-pop-in space-y-4">
         <div className="glass p-5 text-center">
           <p className="text-sm text-re-muted">결과 (자기보고 퍼센트)</p>
           <p className="mt-2 text-lg font-bold">기질이 얼마나 있는지 — 교육용 점수</p>
@@ -138,7 +138,7 @@ export function TraitTestPanel({ onFinished }: { onFinished?: () => void }) {
                   key={o.value}
                   type="button"
                   onClick={() => pick(o.value)}
-                  className={`flex items-center justify-between rounded-xl border-2 px-4 py-3 text-left text-sm font-medium transition ${
+                  className={`flex items-center justify-between rounded-xl border-2 px-4 py-3 text-left text-sm font-medium transition active:scale-[0.98] ${
                     on
                       ? "border-re-accent bg-re-accent/10 text-re-accent"
                       : "border-re-border hover:border-re-accent/50"
