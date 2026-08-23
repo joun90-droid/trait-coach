@@ -12,7 +12,8 @@ import { CopePanel } from "./CopePanel";
 import { GuidePanel } from "./GuidePanel";
 import { StreakCard } from "./StreakCard";
 import { TrendSparkline } from "./TrendSparkline";
-import { BookOpen, Home, Shield, ClipboardList, Sparkles } from "lucide-react";
+import { BookOpen, Home, Shield, ClipboardList, Sparkles, Calculator } from "lucide-react";
+import Link from "next/link";
 
 const TABS: { id: TabId; label: string; icon: typeof Home }[] = [
   { id: "home", label: "홈", icon: Home },
@@ -101,6 +102,19 @@ export function Dashboard() {
             )}
 
             {history.length >= 2 && <TrendSparkline history={history} />}
+
+            <Link
+              href="/tools/margin-calculator"
+              className="glass bento-hover flex items-center gap-3 p-4"
+            >
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-re-accent/15 text-re-accent">
+                <Calculator className="h-5 w-5" />
+              </span>
+              <span className="flex-1">
+                <span className="block text-sm font-semibold">이커머스 마진 역산 계산기</span>
+                <span className="block text-xs text-re-muted">판매가·수수료·부가세로 순이익 즉시 계산 · Zero-API 도구</span>
+              </span>
+            </Link>
 
             <div className="grid gap-3 sm:grid-cols-3">
               {[
